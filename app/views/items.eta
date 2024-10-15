@@ -1,0 +1,42 @@
+<% layout("./layouts/layout.eta") %>
+<a href="/">Main page</a>
+<br/>
+<a href="/lists">Shopping lists</a>
+<h1><%= it.list.name %></h1>
+
+<h2>Add items to the shopping</h2>
+
+<form action="/lists/<%= it.list.id %>/items" method="POST">
+  <input type="hidden" name="listId" value="<%= it.list.id %>">
+  Name: <input  style="display:inline" type="text" name="name" required/>
+  <input class="paper-btn btn-primary" style="display:inline" type="submit" name="nameSubmit" value="Add item!" />
+</form>
+
+<h2>Shopping List items</h2>
+<% if(it.collectedItems || it.nonCollectedItems) { %>
+  <ul>
+  <% if(it.nonCollectedItems) { 
+    it.nonCollectedItems.forEach((items) => { %>
+    <form action="/lists/<%= items.shopping_list_id %>/items/<%= items.id %>/collect" method="POST">
+      <li>
+        <a style="display:inline"><%= items.name %></a>
+        <input type="hidden" name="itemId" value="<%= items.id %>">
+        <input class="paper-btn btn-warning-outline" style="display:inline" type="submit" value="Mark collected!" />
+      </li>
+    </form>    
+  <% }); 
+  }%>
+
+  <% if(it.collectedItems) { 
+    it.collectedItems.forEach((items) => { %>
+    <form action="/lists/<%= items.shopping_list_id %>/items/<%= items.id %>/noncollect" method="POST">
+      <li>
+        <a style="display:inline"><del><%= items.name %></del></a>
+        <input type="hidden" name="itemId" value="<%= items.id %>">
+        <input class="paper-btn btn-secondary-outline" style="display:inline" type="submit" value="Mark noncollected!" />
+      </li>
+    </form>
+  <% }); 
+  }%>
+  </ul>
+<% } %>
