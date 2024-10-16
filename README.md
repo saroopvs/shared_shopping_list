@@ -2,6 +2,12 @@
 
 This is a shared shopping list application. There is no access control for this application. Any one can create shopping list and add items into the list, Deactivate shopping list, mark the item as collected etc
 
+# Shared Shopping list online deployment
+
+The web application is deployed online using render.com
+You can find the application from the following link.
+https://shared-shopping-list-vz5v.onrender.com/
+
 ## Contents
 
 The shared shopping list has a simple Deno application that starts on port `7777`.
